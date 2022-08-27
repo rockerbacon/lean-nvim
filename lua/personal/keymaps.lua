@@ -13,5 +13,5 @@ local mode = {
 	command = 'c'
 }
 
-set_keymap(mode.normal, "<C-l>", ":NERDTree<CR>", opt.noremap)
+set_keymap(mode.normal, "<C-l>", ":34Lexplore<CR>", opt.noremap)
 
