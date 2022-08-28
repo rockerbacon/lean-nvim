@@ -21,7 +21,7 @@ if requires_packer_install then
 	print('Packer downloaded successfully!')
 end
 
-packer = dofile(packer_install_path..'/lua/packer.lua')
+local packer = dofile(packer_install_path..'/lua/packer.lua')
 
 function check_is_plugin_installed(plugin)
 	local plugin_full_name = nil
@@ -47,6 +47,26 @@ function register_plugin(plugin)
 	end
 end
 
+local is_packer_finished = false
+local deferred_functions = {}
+function exec_post_packer_routines()
+	is_packer_finished = true
+
+	for _, fn in ipairs(deferred_functions) do
+		fn()
+	end
+
+	deferred_functions = nil
+end
+
+function exec_after_packer(fn)
+	if is_packer_finished then
+		fn()
+	else
+		table.insert(deferred_functions, fn)
+	end
+end
+
 function load_plugins(plugin_list)
 	local uninstalled_plugins = 0
 	packer.init()
@@ -58,21 +78,37 @@ function load_plugins(plugin_list)
 	end
 
 	if requires_packer_install or uninstalled_plugins > 0 or plugin_list.force_sync then
+		vim.cmd('autocmd User PackerComplete lua exec_post_packer_routines()')
 		packer.sync()
+	else
+		exec_post_packer_routines()
 	end
 end
 
 function colorscheme_installer(colorscheme_files_subpaths)
 	return function (plugin_info)
-		local colorschemes_dir = fn.stdpath('config')..'/colors'
+		local colorschemes_dir = get_colorscheme_dir()
 
 		make_directory(colorschemes_dir)
 
 		for _, subpath in ipairs(colorscheme_files_subpaths) do
 			copy_file_into_directory(
 				plugin_info.install_path..'/'..subpath,
-				fn.stdpath('config')..'/colors'
+				colorschemes_dir
 			)
 		end
 	end
 end
+
+function use_plugin(plugin_module, fn)
+	exec_after_packer(function()
+		fn(require(plugin_module))
+	end)
+end
+
+function setup_plugin(plugin_module, kargs)
+	exec_after_packer(function()
+		require(plugin_module).setup(kargs)
+	end)
+end
+

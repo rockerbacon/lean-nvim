@@ -17,31 +17,35 @@ load_plugins({
 	},
 })
 
-local telescope_actions = require('telescope.actions')
-require('telescope').setup({
-	defaults = {
-		layout_strategy = 'vertical',
-		preview = false,
-		scroll_strategy = 'limit',
-		mappings = {
-			i = {
-				['<esc>'] = telescope_actions.close,
-				['<C-j>'] = telescope_actions.move_selection_next,
-				['<C-k>'] = telescope_actions.move_selection_previous,
-				['<C-o>'] = telescope_actions.select_horizontal,
-			}
-		},
-		layout_config = {
-			vertical = {
-				anchor = 'SW',
-				height = 0.34,
-				width = 0.45
-			}
-		}
-	},
-})
+use_plugin(
+	'telescope.actions',
+	function(actions)
+		setup_plugin('telescope', {
+			defaults = {
+				layout_strategy = 'vertical',
+				preview = false,
+				scroll_strategy = 'limit',
+				mappings = {
+					i = {
+						['<esc>'] = actions.close,
+						['<C-j>'] = actions.move_selection_next,
+						['<C-k>'] = actions.move_selection_previous,
+						['<C-o>'] = actions.select_horizontal,
+					}
+				},
+				layout_config = {
+					vertical = {
+						anchor = 'SW',
+						height = 0.34,
+						width = 0.45
+					}
+				}
+			},
+		})
+	end
+)
 
-require('nvim-autopairs').setup({
+setup_plugin('nvim-autopairs', {
 	disable_in_macro = true
 })
 

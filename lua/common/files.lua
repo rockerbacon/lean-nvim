@@ -1,5 +1,5 @@
 function check_path_exists(pathname)
-	local success = os.execute("stat '"..pathname.."' > /dev/null")
+	local success = os.execute("stat '"..pathname.."' &> /dev/null")
 	if success then
 		return true
 	else
@@ -48,5 +48,9 @@ function copy_file_into_directory(source_path, directory_path)
 		source_path,
 		directory_path..'/'..get_basename(source_path)
 	)
+end
+
+function get_colorscheme_dir()
+	return vim.fn.stdpath('config')..'/colors'
 end
 
