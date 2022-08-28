@@ -19,3 +19,19 @@ use_plugin(
 	end
 )
 
+profile_opt.comment = {
+	mappings = {
+		basic = true,
+		extra = false,
+		extended = false,
+	},
+	toggler = {
+		line = '/cc',
+		block = '/bc'
+	},
+	opleader = {
+		line = '/c',
+		block = '/b'
+	}
+}
+

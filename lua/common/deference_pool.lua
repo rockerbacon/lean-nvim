@@ -20,12 +20,20 @@ function DeferencePool.flush(self)
 	end
 end
 
+function DeferencePool.reset(self)
+	self.queue = {}
+	self.is_deferring = true
+end
+
 function DeferencePool.create()
-	return {
+	local pool = {
 		call = DeferencePool.call,
 		flush = DeferencePool.flush,
-		is_deferring = true,
-		queue = {}
+		reset = DeferencePool.reset,
 	}
+
+	pool:reset()
+
+	return pool
 end
 

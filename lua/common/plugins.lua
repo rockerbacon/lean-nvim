@@ -24,48 +24,31 @@ end
 
 local packer = dofile(packer_install_path..'/lua/packer.lua')
 
-local function check_is_plugin_installed(plugin)
-	local plugin_full_name = nil
-	if type(plugin) == 'table' then
-		plugin_full_name = plugin[1]
-	else
-		plugin_full_name = plugin
-	end
-
-	local plugin_name = get_basename(plugin_full_name)
-	local plugin_dir = plugins_path..'/'..plugin_name
-
-	return check_path_exists(plugin_dir)
-end
-
-local function register_plugin(plugin)
-	packer.use(plugin)
-
-	if (check_is_plugin_installed(plugin)) then
-		return 0
-	else
-		return 1
-	end
-end
+local force_sync = false
 
 post_plugin_initialization = DeferencePool.create()
 
 function load_plugins(plugin_list)
-	local uninstalled_plugins = 0
 	packer.init()
 
-	uninstalled_plugins = uninstalled_plugins + register_plugin('wbthomason/packer.nvim')
+	packer.use('wbthomason/packer.nvim')
 
 	for _, plugin in ipairs(plugin_list) do
-		uninstalled_plugins = uninstalled_plugins + register_plugin(plugin)
+		packer.use(plugin)
 	end
 
-	if requires_packer_install or uninstalled_plugins > 0 or plugin_list.force_sync then
+	if requires_packer_install or force_sync then
 		vim.cmd('autocmd User PackerComplete lua post_plugin_initialization:flush()')
 		packer.sync()
+		force_sync = false
 	else
 		post_plugin_initialization:flush()
 	end
+end
+
+function request_plugin_update_on_next_load()
+	post_plugin_initialization:reset()
+	force_sync = true
 end
 
 function colorscheme_installer(colorscheme_files_subpaths)

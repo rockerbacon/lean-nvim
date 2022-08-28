@@ -10,12 +10,16 @@ load_plugins({
 	},
 	{
 		'nvim-telescope/telescope.nvim',
-		commit = 'nvim-0.6'
+		tag = 'nvim-0.6'
 	},
 	{
 		'windwp/nvim-autopairs',
 		commit = '34bd374f75fb58656572f847e2bc3565b0acb34f'
 	},
+	{
+		'numToStr/Comment.nvim',
+		tag = 'v0.6'
+	}
 })
 
 setup_plugin('telescope', {
@@ -23,4 +27,6 @@ setup_plugin('telescope', {
 })
 
 setup_plugin('nvim-autopairs', profile_opt.autopairs)
+
+setup_plugin('Comment', profile_opt.comment)
 
