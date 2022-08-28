@@ -1,5 +1,5 @@
-require "personal.keymaps"
-require "personal.options"
-require "personal.plugins"
-require "personal.theme"
+require 'personal.options'
+require 'personal.theme'
+require 'personal.keymaps'
+require 'personal.plugins'
 

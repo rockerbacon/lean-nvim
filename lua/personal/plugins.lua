@@ -1,4 +1,5 @@
-require 'common.packer'
+require 'common.plugins'
+require 'personal.options'
 
 load_plugins({
 	'nvim-lua/popup.nvim',
@@ -17,35 +18,9 @@ load_plugins({
 	},
 })
 
-use_plugin(
-	'telescope.actions',
-	function(actions)
-		setup_plugin('telescope', {
-			defaults = {
-				layout_strategy = 'vertical',
-				preview = false,
-				scroll_strategy = 'limit',
-				mappings = {
-					i = {
-						['<esc>'] = actions.close,
-						['<C-j>'] = actions.move_selection_next,
-						['<C-k>'] = actions.move_selection_previous,
-						['<C-o>'] = actions.select_horizontal,
-					}
-				},
-				layout_config = {
-					vertical = {
-						anchor = 'SW',
-						height = 0.34,
-						width = 0.45
-					}
-				}
-			},
-		})
-	end
-)
-
-setup_plugin('nvim-autopairs', {
-	disable_in_macro = true
+setup_plugin('telescope', {
+	defaults = profile_opt.telescope,
 })
+
+setup_plugin('nvim-autopairs', profile_opt.autopairs)
 

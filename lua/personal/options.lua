@@ -1,3 +1,5 @@
+profile_opt = {}
+
 vim.opt.conceallevel = 0
 vim.opt.concealcursor = ''
 vim.opt.cursorline = true
@@ -17,4 +19,12 @@ vim.opt.smartindent = true
 vim.opt.tabstop = 2
 vim.opt.termguicolors = true
 vim.opt.updatetime = 300
+
+profile_opt.telescope = {
+	scroll_strategy = 'limit'
+}
+
+profile_opt.autopairs = {
+	disable_in_macro = true
+}
 

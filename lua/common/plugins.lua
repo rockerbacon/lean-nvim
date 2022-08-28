@@ -2,8 +2,8 @@ require 'common.files'
 
 local fn = vim.fn
 
-local packer_plugins_path = fn.stdpath('data')..'/site/pack/packer/start'
-local packer_install_path = packer_plugins_path..'/packer.nvim'
+local plugins_path = fn.stdpath('data')..'/site/pack/packer/start'
+local packer_install_path = plugins_path..'/packer.nvim'
 
 local requires_packer_install = not check_path_exists(packer_install_path)
 
@@ -32,7 +32,7 @@ function check_is_plugin_installed(plugin)
 	end
 
 	local plugin_name = get_basename(plugin_full_name)
-	local plugin_dir = packer_plugins_path..'/'..plugin_name
+	local plugin_dir = plugins_path..'/'..plugin_name
 
 	return check_path_exists(plugin_dir)
 end
@@ -49,7 +49,7 @@ end
 
 local is_packer_finished = false
 local deferred_functions = {}
-function exec_post_packer_routines()
+function exec_post_plugin_management_routines()
 	is_packer_finished = true
 
 	for _, fn in ipairs(deferred_functions) do
@@ -59,7 +59,7 @@ function exec_post_packer_routines()
 	deferred_functions = nil
 end
 
-function exec_after_packer(fn)
+function do_after_plugin_initialization(fn)
 	if is_packer_finished then
 		fn()
 	else
@@ -78,10 +78,10 @@ function load_plugins(plugin_list)
 	end
 
 	if requires_packer_install or uninstalled_plugins > 0 or plugin_list.force_sync then
-		vim.cmd('autocmd User PackerComplete lua exec_post_packer_routines()')
+		vim.cmd('autocmd User PackerComplete lua exec_post_plugin_management_routines()')
 		packer.sync()
 	else
-		exec_post_packer_routines()
+		exec_post_plugin_management_routines()
 	end
 end
 
@@ -101,13 +101,13 @@ function colorscheme_installer(colorscheme_files_subpaths)
 end
 
 function use_plugin(plugin_module, fn)
-	exec_after_packer(function()
+	do_after_plugin_initialization(function()
 		fn(require(plugin_module))
 	end)
 end
 
 function setup_plugin(plugin_module, kargs)
-	exec_after_packer(function()
+	do_after_plugin_initialization(function()
 		require(plugin_module).setup(kargs)
 	end)
 end
