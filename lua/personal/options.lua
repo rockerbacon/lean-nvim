@@ -1,5 +1,6 @@
 profile_opt = {}
 
+vim.opt.autoindent = true
 vim.opt.conceallevel = 0
 vim.opt.concealcursor = ''
 vim.opt.cursorline = true
@@ -15,7 +16,6 @@ vim.opt.shiftwidth = 2
 vim.opt.showcmd = true
 vim.opt.showmatch = true
 vim.opt.smartcase = true
-vim.opt.smartindent = true
 vim.opt.tabstop = 2
 vim.opt.termguicolors = true
 vim.opt.updatetime = 300
