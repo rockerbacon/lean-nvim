@@ -35,3 +35,13 @@ profile_opt.comment = {
 	}
 }
 
+use_plugin(
+	'cmp',
+	function(cmp)
+		profile_opt.cmp.mapping = {
+			['<CR>'] = cmp.mapping.confirm({ select = true }),
+			['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i' }),
+		}
+	end
+)
+

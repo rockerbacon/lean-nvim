@@ -1,3 +1,5 @@
+require 'common.plugins'
+
 profile_opt = {}
 
 vim.opt.autoindent = true
@@ -25,6 +27,26 @@ profile_opt.telescope = {
 }
 
 profile_opt.autopairs = {
-	disable_in_macro = true
+	enable_moveright = false,
+	disable_in_macro = true,
+	enable_bracket_in_quote = false
 }
+
+profile_opt.cmp = {}
+use_plugin(
+	'luasnip',
+	function(luasnip)
+		profile_opt.cmp.snipet = {
+			expand = function(args)
+				luasnip.expand(args.body)
+			end
+		}
+
+		profile_opt.cmp.sources = {
+			{ name = 'buffer' },
+			{ name = 'path' },
+			{ name = 'luasnip' }
+		}
+	end
+)
 

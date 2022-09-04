@@ -14,11 +14,27 @@ load_plugins({
 	},
 	{
 		'windwp/nvim-autopairs',
-		commit = '34bd374f75fb58656572f847e2bc3565b0acb34f'
+		commit = 'fa6876f832ea1b71801c4e481d8feca9a36215ec'
 	},
 	{
 		'numToStr/Comment.nvim',
 		tag = 'v0.6'
+	},
+	{
+		'L3MON4D3/LuaSnip',
+		commit = 'a45cd5f4d9dea7c64b37fa69dea91e46bbbe9671'
+	},
+	{
+		'hrsh7th/nvim-cmp',
+		commit = '4efecf7f5b86949de387e63fa86715bc39f92219'
+	},
+	{
+		'hrsh7th/cmp-buffer',
+		commit = 'a0fe52489ff6e235d62407f8fa72aef80222040a'
+	},
+	{
+		'hrsh7th/cmp-path',
+		commit = '56a0fe5c46835ecc6323bda69f3924758b991590'
 	}
 })
 
@@ -27,6 +43,8 @@ setup_plugin('telescope', {
 })
 
 setup_plugin('nvim-autopairs', profile_opt.autopairs)
+
+setup_plugin('cmp', profile_opt.cmp)
 
 setup_plugin('Comment', profile_opt.comment)
 
