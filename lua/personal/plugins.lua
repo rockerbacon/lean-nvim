@@ -13,10 +13,6 @@ load_plugins({
 		tag = 'nvim-0.6'
 	},
 	{
-		'windwp/nvim-autopairs',
-		commit = 'fa6876f832ea1b71801c4e481d8feca9a36215ec'
-	},
-	{
 		'numToStr/Comment.nvim',
 		tag = 'v0.6'
 	},
@@ -41,8 +37,6 @@ load_plugins({
 setup_plugin('telescope', {
 	defaults = profile_opt.telescope,
 })
-
-setup_plugin('nvim-autopairs', profile_opt.autopairs)
 
 setup_plugin('cmp', profile_opt.cmp)
 

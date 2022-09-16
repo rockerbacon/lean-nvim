@@ -38,9 +38,22 @@ profile_opt.comment = {
 use_plugin(
 	'cmp',
 	function(cmp)
+		local selectionOptions = {
+			behavior = cmp.SelectBehavior.Insert
+		}
+
+		local insertMode = { 'i' }
+
 		profile_opt.cmp.mapping = {
-			['<CR>'] = cmp.mapping.confirm({ select = true }),
-			['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i' }),
+			['<Tab>'] = cmp.mapping.select_next_item(
+				selectionOptions,
+				insertMode
+			),
+			['<S-Tab>'] = cmp.mapping.select_prev_item(
+				selectionOptions,
+				insertMode
+			),
+			['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), insertMode),
 		}
 	end
 )

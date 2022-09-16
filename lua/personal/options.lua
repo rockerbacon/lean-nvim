@@ -26,12 +26,6 @@ profile_opt.telescope = {
 	scroll_strategy = 'limit'
 }
 
-profile_opt.autopairs = {
-	enable_moveright = false,
-	disable_in_macro = true,
-	enable_bracket_in_quote = false
-}
-
 profile_opt.cmp = {}
 use_plugin(
 	'luasnip',

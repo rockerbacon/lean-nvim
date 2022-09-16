@@ -18,5 +18,9 @@ profile_opt.telescope.layout_config = {
 	}
 }
 
+profile_opt.cmp.formatting = {
+	fields = { 'abbr' }
+}
+
 use_colorscheme('noctu')
 
