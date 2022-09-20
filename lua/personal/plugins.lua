@@ -31,6 +31,14 @@ load_plugins({
 	{
 		'hrsh7th/cmp-path',
 		commit = '56a0fe5c46835ecc6323bda69f3924758b991590'
+	},
+	{
+		'hrsh7th/cmp-nvim-lsp',
+		commit = '134117299ff9e34adde30a735cd8ca9cf8f3db81'
+	},
+	{
+		'neovim/nvim-lspconfig',
+		tag = 'v0.1.2'
 	}
 })
 

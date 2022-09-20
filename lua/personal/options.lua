@@ -39,7 +39,8 @@ use_plugin(
 		profile_opt.cmp.sources = {
 			{ name = 'buffer' },
 			{ name = 'path' },
-			{ name = 'luasnip' }
+			{ name = 'luasnip' },
+			{ name = 'nvim-lsp' }
 		}
 	end
 )

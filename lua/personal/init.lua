@@ -6,6 +6,7 @@ hot_require 'personal.options'
 hot_require 'personal.theme'
 hot_require 'personal.keymaps'
 hot_require 'personal.plugins'
+hot_require 'personal.lsp'
 
 before_reloading(
 	'personal.plugins',

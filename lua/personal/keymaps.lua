@@ -26,12 +26,12 @@ profile_opt.comment = {
 		extended = false,
 	},
 	toggler = {
-		line = '/cc',
-		block = '/bc'
+		line = '\\cc',
+		block = '\\bc'
 	},
 	opleader = {
-		line = '/c',
-		block = '/b'
+		line = '\\c',
+		block = '\\b'
 	}
 }
 
