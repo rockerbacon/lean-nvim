@@ -9,6 +9,7 @@ set_command_shortcut('<C-e>', 'lua vim.diagnostic.open_float(nil)')
 set_command_shortcut('<C-d>', 'lua vim.lsp.buf.declaration()')
 set_command_shortcut('<C-D>', 'lua vim.lsp.buf.definition()')
 set_command_shortcut('<C-f>', 'lua vim.lsp.buf.code_action(nil)')
+set_command_shortcut('<C-t>', 'lua vim.lsp.buf.hover()')
 
 use_plugin(
 	'telescope.actions',
