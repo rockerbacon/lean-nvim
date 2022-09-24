@@ -51,7 +51,11 @@ sumneko_lua_settings = {
 	},
 	settings = {
 		Lua = {
-			telemetry = { enable = false }
+			telemetry = { enable = false },
+			completion = {
+				enable = true,
+				autoRequire = false
+			}
 		}
 	},
 }
