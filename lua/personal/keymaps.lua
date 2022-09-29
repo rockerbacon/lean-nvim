@@ -2,8 +2,8 @@ require 'common.keymaps'
 require 'common.plugins'
 require 'personal.options'
 
-set_command_shortcut('<C-l>', profile_opt.explorer_width..'Lexplore')
-set_command_shortcut('<C-p>', 'Telescope find_files')
+set_command_shortcut('<C-l>', 'lua leanvim.browse_files({ display = "split" })')
+set_command_shortcut('<C-p>', 'lua leanvim.browse_files({ display = "popup" })')
 
 set_command_shortcut('<C-e>', 'lua vim.diagnostic.open_float(nil)')
 set_command_shortcut('<C-d>', 'lua vim.lsp.buf.declaration()')

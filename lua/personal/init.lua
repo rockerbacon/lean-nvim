@@ -4,6 +4,7 @@ set_reload_entrypoint 'personal.init'
 
 hot_require 'personal.options'
 hot_require 'personal.theme'
+hot_require 'personal.functions'
 hot_require 'personal.keymaps'
 hot_require 'personal.plugins'
 hot_require 'personal.lsp'

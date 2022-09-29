@@ -43,7 +43,7 @@ load_plugins({
 	{
 		'steelsojka/pears.nvim',
 		commit = '14e6c47c74768b74190a529e41911ae838c45254'
-	}
+	},
 })
 
 setup_plugin('telescope', {
@@ -55,4 +55,13 @@ setup_plugin('cmp', profile_opt.cmp)
 setup_plugin('Comment', profile_opt.comment)
 
 setup_plugin('pears', nil)
+
+browse_files = nil
+use_plugin(
+	'telescope.builtin',
+	function(builtin)
+		browse_files = builtin.find_files
+	end
+)
+
 
