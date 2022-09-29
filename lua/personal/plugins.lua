@@ -39,6 +39,10 @@ load_plugins({
 	{
 		'neovim/nvim-lspconfig',
 		tag = 'v0.1.2'
+	},
+	{
+		'steelsojka/pears.nvim',
+		commit = '14e6c47c74768b74190a529e41911ae838c45254'
 	}
 })
 
@@ -49,4 +53,6 @@ setup_plugin('telescope', {
 setup_plugin('cmp', profile_opt.cmp)
 
 setup_plugin('Comment', profile_opt.comment)
+
+setup_plugin('pears', nil)
 
