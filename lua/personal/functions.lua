@@ -21,7 +21,6 @@ local function browse_files(kargs)
 	end
 end
 
-print('defining leanvim')
 leanvim = {
 	browse_files = browse_files
 }
