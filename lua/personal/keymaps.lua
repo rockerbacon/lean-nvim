@@ -1,29 +1,38 @@
-require 'common.keymaps'
+local keymaps = require('common.keymaps')
 require 'common.plugins'
 require 'personal.options'
 
-clear_all_keymaps()
+local esc = keymaps.special.escape
+local tab = keymaps.special.tab
+local space = keymaps.special.space
+
+local ctrl = keymaps.modifier.ctrl
+local shift = keymaps.modifier.shift
+
+local leader = keymaps.leader
+
+keymaps.clear_all()
 
 vim.g.mapleader = ','
 
-add_keymap('l', 'lua leanvim.browse_files({ display = "split" })')
-add_keymap('p', 'lua leanvim.browse_files({ display = "popup" })')
+keymaps.add(ctrl+'l', 'lua leanvim.browse_files({ display = "split" })')
+keymaps.add(leader+'p', 'lua leanvim.browse_files({ display = "popup" })')
 
-add_keymap('e', 'lua vim.diagnostic.open_float(nil)')
-add_keymap('gd', 'lua vim.lsp.buf.declaration()')
-add_keymap('d', 'lua vim.lsp.buf.definition()')
-add_keymap('f', 'lua vim.lsp.buf.code_action(nil)')
-add_keymap('t', 'lua vim.lsp.buf.hover()')
+keymaps.add(leader+'e', 'lua vim.diagnostic.open_float(nil)')
+keymaps.add(leader+'gd', 'lua vim.lsp.buf.declaration()')
+keymaps.add(leader+'d', 'lua vim.lsp.buf.definition()')
+keymaps.add(leader+'f', 'lua vim.lsp.buf.code_action(nil)')
+keymaps.add(leader+'t', 'lua vim.lsp.buf.hover()')
 
 use_plugin(
 	'telescope.actions',
 	function(actions)
 		profile_opt.telescope.mappings = {
 			i = {
-				[special_key.escape] = actions.close,
-				[modifier_key.ctrl('j')] = actions.move_selection_next,
-				[modifier_key.ctrl('k')] = actions.move_selection_previous,
-				[modifier_key.ctrl('o')] = actions.select_horizontal,
+				[esc] = actions.close,
+				[ctrl+'j'] = actions.move_selection_next,
+				[ctrl+'k'] = actions.move_selection_previous,
+				[ctrl+'o'] = actions.select_horizontal,
 			}
 		}
 	end
@@ -36,12 +45,12 @@ profile_opt.comment = {
 		extended = false,
 	},
 	toggler = {
-		line = lead_key('cc'),
-		block = lead_key('bc')
+		line = leader+'cc',
+		block = leader+'bc',
 	},
 	opleader = {
-		line = lead_key('c'),
-		block = lead_key('b')
+		line = leader+'c',
+		block = leader+'b'
 	}
 }
 
@@ -52,18 +61,18 @@ use_plugin(
 			behavior = cmp.SelectBehavior.Insert
 		}
 
-		local insertMode = { keymap_mode.insert }
+		local insertMode = { keymaps.mode.insert }
 
 		profile_opt.cmp.mapping = {
-			[special_key.tab] = cmp.mapping.select_next_item(
+			[tab] = cmp.mapping.select_next_item(
 				selectionOptions,
 				insertMode
 			),
-			[modifier_key.shift(special_key.tab)] = cmp.mapping.select_prev_item(
+			[shift+tab] = cmp.mapping.select_prev_item(
 				selectionOptions,
 				insertMode
 			),
-			[modifier_key.ctrl(special_key.space)] = cmp.mapping(cmp.mapping.complete(), insertMode),
+			[ctrl+space] = cmp.mapping(cmp.mapping.complete(), insertMode),
 		}
 	end
 )
