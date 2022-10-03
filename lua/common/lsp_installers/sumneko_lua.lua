@@ -13,7 +13,7 @@ local install_dir = path.lsp_servers..'/sumneko_lua'
 
 local binary_path = install_dir..'/bin/lua-language-server'
 
-function sumneko_lua_installer()
+local function install()
 	if not fs.check_path_exists(install_dir) then
 		print('Installing sumneko_lua server...')
 
@@ -42,7 +42,7 @@ function sumneko_lua_installer()
 	end
 end
 
-sumneko_lua_settings = {
+local settings = {
 	cmd = {
 		binary_path,
 	},
@@ -55,5 +55,10 @@ sumneko_lua_settings = {
 			}
 		}
 	},
+}
+
+return {
+	install = install,
+	settings = settings,
 }
 
