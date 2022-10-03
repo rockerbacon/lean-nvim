@@ -1,13 +1,10 @@
 local fs = require('common.filesystem')
 local path = require('common.path')
-require 'common.deference_pool'
+local DeferencePool = require('common.deference_pool')
 
 local fn = vim.fn
 
-local plugins_path = fn.stdpath('data')..'/site/pack/packer/start'
-local packer_install_path = plugins_path..'/packer.nvim'
-
-local requires_packer_install = not fs.check_path_exists(packer_install_path)
+local requires_packer_install = not fs.check_path_exists(path.packer_installation)
 
 if requires_packer_install then
 	print('Downloading packer...')
@@ -17,19 +14,19 @@ if requires_packer_install then
 		'--depth',
 		'1',
 		'https://github.com/wbthomason/packer.nvim',
-		packer_install_path,
+		path.packer_installation,
 	})
 	vim.cmd('packadd packer.nvim')
 	print('Packer downloaded successfully!')
 end
 
-local packer = dofile(packer_install_path..'/lua/packer.lua')
+local packer = dofile(path.packer_installation..'/lua/packer.lua')
 
 local force_sync = false
 
-post_plugin_initialization = DeferencePool.create()
+local post_plugin_initialization = DeferencePool.new()
 
-function load_plugins(plugin_list)
+local function load(plugin_list)
 	packer.init()
 
 	packer.use('wbthomason/packer.nvim')
@@ -47,12 +44,12 @@ function load_plugins(plugin_list)
 	end
 end
 
-function request_plugin_update_on_next_load()
+local function update_on_next_load()
 	post_plugin_initialization:reset()
 	force_sync = true
 end
 
-function colorscheme_installer(colorscheme_files_subpaths)
+local function new_colorscheme_installer(colorscheme_files_subpaths)
 	return function (plugin_info)
 		fs.make_directory(path.colorschemes)
 
@@ -65,15 +62,27 @@ function colorscheme_installer(colorscheme_files_subpaths)
 	end
 end
 
-function use_plugin(plugin_module, fn)
+local function use(plugin_module, fn)
 	post_plugin_initialization:call(function()
 		fn(require(plugin_module))
 	end)
 end
 
-function setup_plugin(plugin_module, kargs)
+local function setup(plugin_module, kargs)
 	post_plugin_initialization:call(function()
 		require(plugin_module).setup(kargs)
 	end)
 end
 
+local function post_initialization(fn)
+	post_plugin_initialization:call(fn)
+end
+
+return {
+	load = load,
+	use = use,
+	setup = setup,
+	update_on_next_load = update_on_next_load,
+	new_colorscheme_installer = new_colorscheme_installer,
+	post_initialization = post_initialization,
+}

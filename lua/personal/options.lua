@@ -1,4 +1,4 @@
-require 'common.plugins'
+local plugins = require('common.plugins')
 
 profile_opt = {}
 
@@ -27,7 +27,7 @@ profile_opt.telescope = {
 }
 
 profile_opt.cmp = {}
-use_plugin(
+plugins.use(
 	'luasnip',
 	function(luasnip)
 		profile_opt.cmp.snipet = {

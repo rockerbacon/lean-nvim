@@ -1,4 +1,4 @@
-require 'common.theme'
+local theme = require('common.theme')
 require 'personal.options'
 
 vim.opt.background = 'dark'
@@ -22,5 +22,5 @@ profile_opt.cmp.formatting = {
 	fields = { 'abbr' }
 }
 
-use_colorscheme('noctu')
+theme.use_colorscheme('noctu')
 

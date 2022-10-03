@@ -1,12 +1,12 @@
-require 'common.plugins'
+local plugins = require('common.plugins')
 require 'personal.options'
 
-load_plugins({
+plugins.load({
 	'nvim-lua/popup.nvim',
 	'nvim-lua/plenary.nvim',
 	{
 		'rockerbacon/vim-noctu',
-		run = colorscheme_installer({ 'colors/noctu.vim' })
+		run = plugins.new_colorscheme_installer({ 'colors/noctu.vim' })
 	},
 	{
 		'nvim-telescope/telescope.nvim',
@@ -46,22 +46,13 @@ load_plugins({
 	},
 })
 
-setup_plugin('telescope', {
+plugins.setup('telescope', {
 	defaults = profile_opt.telescope,
 })
 
-setup_plugin('cmp', profile_opt.cmp)
+plugins.setup('cmp', profile_opt.cmp)
 
-setup_plugin('Comment', profile_opt.comment)
+plugins.setup('Comment', profile_opt.comment)
 
-setup_plugin('pears', nil)
-
-browse_files = nil
-use_plugin(
-	'telescope.builtin',
-	function(builtin)
-		browse_files = builtin.find_files
-	end
-)
-
+plugins.setup('pears', nil)
 

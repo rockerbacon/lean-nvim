@@ -1,5 +1,5 @@
 local keymaps = require('common.keymaps')
-require 'common.plugins'
+local plugins = require('common.plugins')
 require 'personal.options'
 
 local esc = keymaps.special.escape
@@ -24,7 +24,7 @@ keymaps.add(leader+'d', 'lua vim.lsp.buf.definition()')
 keymaps.add(leader+'f', 'lua vim.lsp.buf.code_action(nil)')
 keymaps.add(leader+'t', 'lua vim.lsp.buf.hover()')
 
-use_plugin(
+plugins.use(
 	'telescope.actions',
 	function(actions)
 		profile_opt.telescope.mappings = {
@@ -54,7 +54,7 @@ profile_opt.comment = {
 	}
 }
 
-use_plugin(
+plugins.use(
 	'cmp',
 	function(cmp)
 		local selectionOptions = {

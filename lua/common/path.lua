@@ -28,8 +28,19 @@ local function get_lsp_server_dir()
 	return vim.fn.stdpath('config')..'/lsp_servers'
 end
 
+local function get_plugins_dir()
+	return vim.fn.stdpath('data')..'/site/pack/packer/start'
+end
+
+local function get_packer_install_dir()
+	return get_plugins_dir()..'/packer.nvim'
+end
+
 return {
 	colorschemes = get_colorscheme_dir(),
 	downloads = get_download_path(),
 	lsp_servers = get_lsp_server_dir(),
+	plugins = get_plugins_dir(),
+	packer_installation = get_packer_install_dir(),
 }
+

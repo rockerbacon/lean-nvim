@@ -1,4 +1,4 @@
-DeferencePool = {}
+local DeferencePool = {}
 
 function DeferencePool.call(self, fn)
 	if self.is_deferring then
@@ -25,7 +25,7 @@ function DeferencePool.reset(self)
 	self.is_deferring = true
 end
 
-function DeferencePool.create()
+function DeferencePool.new()
 	local pool = {
 		call = DeferencePool.call,
 		flush = DeferencePool.flush,
@@ -36,4 +36,6 @@ function DeferencePool.create()
 
 	return pool
 end
+
+return DeferencePool
 

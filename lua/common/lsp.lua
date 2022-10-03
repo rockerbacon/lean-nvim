@@ -1,4 +1,4 @@
-require 'common.plugins'
+local plugins = require('common.plugins')
 require 'common.lsp_installers'
 
 local capabilities = {
@@ -6,7 +6,7 @@ local capabilities = {
 	cmp = nil
 }
 
-use_plugin(
+plugins.use(
 	'cmp_nvim_lsp',
 	function (cmp)
 		capabilities.cmp = cmp.update_capabilities(capabilities.vim)
@@ -59,7 +59,7 @@ local function install_server(server_info)
 end
 
 local function setup_server(server_info)
-	use_plugin(
+	plugins.use(
 		'lspconfig',
 		function(lspconfig)
 			local server_name = get_server_name(server_info)

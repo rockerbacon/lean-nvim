@@ -1,8 +1,12 @@
-require 'common.plugins'
+local plugins = require('common.plugins')
 
-function use_colorscheme(colorscheme)
-	post_plugin_initialization:call(function()
+local function use_colorscheme(colorscheme)
+	plugins.post_initialization(function()
 		vim.cmd('colorscheme '..colorscheme)
 	end)
 end
+
+return {
+	use_colorscheme = use_colorscheme
+}
 

@@ -1,7 +1,7 @@
-require 'common.plugins'
+local plugins = require('common.plugins')
 
 local telescope_builtin = nil
-use_plugin(
+plugins.use(
 	'telescope.builtin',
 	function(builtin)
 		telescope_builtin = builtin
