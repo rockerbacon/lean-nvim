@@ -1,4 +1,5 @@
-require 'common.files'
+local fs = require('common.filesystem')
+local path = require('common.path')
 require 'common.deference_pool'
 
 local fn = vim.fn
@@ -6,7 +7,7 @@ local fn = vim.fn
 local plugins_path = fn.stdpath('data')..'/site/pack/packer/start'
 local packer_install_path = plugins_path..'/packer.nvim'
 
-local requires_packer_install = not check_path_exists(packer_install_path)
+local requires_packer_install = not fs.check_path_exists(packer_install_path)
 
 if requires_packer_install then
 	print('Downloading packer...')
@@ -53,14 +54,12 @@ end
 
 function colorscheme_installer(colorscheme_files_subpaths)
 	return function (plugin_info)
-		local colorschemes_dir = get_colorscheme_dir()
-
-		make_directory(colorschemes_dir)
+		fs.make_directory(path.colorschemes)
 
 		for _, subpath in ipairs(colorscheme_files_subpaths) do
-			copy_file_into_directory(
+			fs.copy_file_into_directory(
 				plugin_info.install_path..'/'..subpath,
-				colorschemes_dir
+				path.colorschemes
 			)
 		end
 	end

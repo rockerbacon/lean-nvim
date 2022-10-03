@@ -1,4 +1,7 @@
-require 'common.files'
+local fs = require('common.filesystem')
+local extractor = require('common.extractor')
+local http = require('common.http')
+local path = require('common.path')
 
 local download_url = {
 	linux = {
@@ -6,18 +9,12 @@ local download_url = {
 	}
 }
 
-local function get_install_dir()
-	return get_lsp_server_dir()..'/sumneko_lua'
-end
+local install_dir = path.lsp_servers..'/sumneko_lua'
 
-local function get_binary_path()
-	return get_install_dir()..'/bin/lua-language-server'
-end
+local binary_path = install_dir..'/bin/lua-language-server'
 
 function sumneko_lua_installer()
-	local install_dir = get_install_dir()
-
-	if not check_path_exists(install_dir) then
+	if not fs.check_path_exists(install_dir) then
 		print('Installing sumneko_lua server...')
 
 		-- TODO cross platform downloads
@@ -28,14 +25,14 @@ function sumneko_lua_installer()
 		end
 
 		print('Downloading binaries...')
-		local tarball = download(download_url.linux.x86)
+		local tarball = http.download(download_url.linux.x86)
 
 		print('Extracting binaries...')
-		make_directory(install_dir)
-		local extraction_success = pcall(extract, tarball, install_dir)
+		fs.make_directory(install_dir)
+		local extraction_success = pcall(extractor.extract, tarball, install_dir)
 
 		print('Cleaning up downloaded file...')
-		remove_path(tarball)
+		fs.remove_path(tarball)
 
 		if not extraction_success then
 			error('Could not extract file')
@@ -47,7 +44,7 @@ end
 
 sumneko_lua_settings = {
 	cmd = {
-		get_binary_path()
+		binary_path,
 	},
 	settings = {
 		Lua = {
