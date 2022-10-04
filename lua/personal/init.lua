@@ -1,16 +1,16 @@
-require 'common.hot_reload'
+local HotLoader = require('common.hot_loader')
 local plugins = require('common.plugins')
 
-set_reload_entrypoint 'personal.init'
+local loader = HotLoader.single('personal.init')
 
-hot_require 'personal.options'
-hot_require 'personal.theme'
-hot_require 'personal.functions'
-hot_require 'personal.keymaps'
-hot_require 'personal.plugins'
-hot_require 'personal.lsp'
+loader:load('personal.options')
+loader:load('personal.theme')
+loader:load('personal.functions')
+loader:load('personal.keymaps')
+loader:load('personal.plugins')
+loader:load('personal.lsp')
 
-before_reloading(
+loader:before_reloading(
 	'personal.plugins',
 	plugins.update_on_next_load
 )

@@ -1,14 +1,12 @@
 local fs = require('common.filesystem')
 local path = require('common.path')
-local DeferencePool = require('common.deference_pool')
-
-local fn = vim.fn
+local PluginsManager = require('common.plugins.manager')
 
 local requires_packer_install = not fs.check_path_exists(path.packer_installation)
 
 if requires_packer_install then
 	print('Downloading packer...')
-	fn.system({
+	vim.fn.system({
 		'git',
 		'clone',
 		'--depth',
@@ -20,33 +18,14 @@ if requires_packer_install then
 	print('Packer downloaded successfully!')
 end
 
-local packer = dofile(path.packer_installation..'/lua/packer.lua')
-
-local force_sync = false
-
-local post_plugin_initialization = DeferencePool.new()
+local manager = PluginsManager.new()
 
 local function load(plugin_list)
-	packer.init()
-
-	packer.use('wbthomason/packer.nvim')
-
-	for _, plugin in ipairs(plugin_list) do
-		packer.use(plugin)
-	end
-
-	if requires_packer_install or force_sync then
-		vim.cmd('autocmd User PackerComplete lua post_plugin_initialization:flush()')
-		packer.sync()
-		force_sync = false
-	else
-		post_plugin_initialization:flush()
-	end
+	manager:load(plugin_list)
 end
 
 local function update_on_next_load()
-	post_plugin_initialization:reset()
-	force_sync = true
+	manager:update_on_next_load()
 end
 
 local function new_colorscheme_installer(colorscheme_files_subpaths)
@@ -63,20 +42,26 @@ local function new_colorscheme_installer(colorscheme_files_subpaths)
 end
 
 local function use(plugin_module, fn)
-	post_plugin_initialization:call(function()
+	manager:after_sync(function()
 		fn(require(plugin_module))
 	end)
 end
 
 local function setup(plugin_module, kargs)
-	post_plugin_initialization:call(function()
+	manager:after_sync(function()
 		require(plugin_module).setup(kargs)
 	end)
 end
 
 local function post_initialization(fn)
-	post_plugin_initialization:call(fn)
+	manager:after_sync(fn)
 end
+
+local function run_post_initialization()
+	manager:run_post_sync()
+end
+
+vim.cmd('autocmd User PackerComplete lua require("common.plugins").run_post_initialization()')
 
 return {
 	load = load,
@@ -85,4 +70,5 @@ return {
 	update_on_next_load = update_on_next_load,
 	new_colorscheme_installer = new_colorscheme_installer,
 	post_initialization = post_initialization,
+	run_post_initialization = run_post_initialization,
 }
