@@ -1,6 +1,5 @@
-local sumneko_lua_installer = require('common.lsp_installers.sumneko_lua')
-
 return {
-	sumneko_lua = sumneko_lua_installer,
+	rust_analyzer = require('common.lsp_installers.rust_analyzer'),
+	sumneko_lua = require('common.lsp_installers.sumneko_lua'),
 }
 

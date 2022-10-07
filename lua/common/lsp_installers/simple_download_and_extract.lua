@@ -50,13 +50,14 @@ function SimpleDownloadAndExtractInstaller.__call(self)
 
 		print('Extracting binaries...')
 		fs.make_directory(install_dir)
-		local extraction_success = pcall(extractor.extract, tarball, install_dir)
+		local extraction_success, extraction_error = pcall(extractor.extract, tarball, install_dir)
 
 		print('Cleaning up downloaded file...')
 		fs.remove_path(tarball)
 
 		if not extraction_success then
-			error('Could not extract file')
+			fs.remove_path(install_dir)
+			error('Could not extract file: '..extraction_error)
 		end
 
 		print('Server installed successfully')
