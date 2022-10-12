@@ -98,6 +98,13 @@ local function make_temp_dir()
 	return created_tmpdir
 end
 
+local function mark_executable(pathname)
+	local success = os.execute("chmod u+x '"..pathname.."' &> /dev/null")
+	if not success then
+		error('Could not mark "'..pathname..'" as executable')
+	end
+end
+
 return {
 	check_path_exists = check_path_exists,
 	make_directory = make_directory,
@@ -107,4 +114,5 @@ return {
 	remove_path = remove_path,
 	get_file_extension = get_file_extension,
 	make_temp_dir = make_temp_dir,
+	mark_executable = mark_executable,
 }
