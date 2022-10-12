@@ -19,6 +19,9 @@ if requires_packer_install then
 end
 
 local manager = PluginsManager.new()
+if requires_packer_install then
+	manager:update_on_next_load()
+end
 
 local function load(plugin_list)
 	manager:load(plugin_list)
