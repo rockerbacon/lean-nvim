@@ -16,7 +16,7 @@ local function extract_gz(file, destination_directory)
 		'.gz'
 	)
 
-	local success = os.execute("gzip -cd '"..file.."' 2> /home/vitor.santos/extract.log 1> '"..destination_directory.."/"..file_without_extension.."'")
+	local success = os.execute("gzip -cd '"..file.."' 2> /dev/null 1> '"..destination_directory.."/"..file_without_extension.."'")
 
 	return success
 end
