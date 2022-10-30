@@ -44,6 +44,10 @@ plugins.load({
 		'steelsojka/pears.nvim',
 		commit = '14e6c47c74768b74190a529e41911ae838c45254'
 	},
+	{
+		'Darazaki/indent-o-matic',
+		commit = '68f19ea15da7e944e7a5c848831837d2023b4ac2'
+	}
 })
 
 plugins.setup('telescope', {
@@ -55,4 +59,6 @@ plugins.setup('cmp', profile_opt.cmp)
 plugins.setup('Comment', profile_opt.comment)
 
 plugins.setup('pears', nil)
+
+plugins.setup('indent-o-matic', {})
 
