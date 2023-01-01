@@ -52,12 +52,12 @@ local installer = Builder.start(server_name)
 	:exec(LspInstallerAction.new(
 		function()
 			print('Installing typescript and typescript-language-server NPM packages...')
-			local success = os.execute('npm install --location=global typescript typescript-language-server &> /dev/null')
+			local installation = shell.exec('npm install --location=global typescript typescript-language-server')
 
-			if not success then
-				error('Could not install npm packages "typescript" and "typescript-language-server"')
-			else
+			if installation.success then
 				print('NPM package installation complete!')
+			else
+				error('Could not install npm packages "typescript" and "typescript-language-server"')
 			end
 		end,
 		function() end,
