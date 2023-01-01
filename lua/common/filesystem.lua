@@ -43,11 +43,44 @@ local function get_basename(pathname)
 	return pathname:match('[^/]+$')
 end
 
+--- Gets the directory name of the path
+--- @param pathname string
+--- @param updir ? number How many directories to move up, default is 1
+local function get_dirname(pathname, updir)
+	updir = updir or 1
+
+	local last_slash = pathname:len() - pathname:reverse():find('/')
+	local dirname = pathname:sub(1, last_slash)
+
+	if updir == 1 then
+		return dirname
+	else
+		return get_dirname(dirname, updir - 1)
+	end
+end
+
 local function copy_file_into_directory(source_path, directory_path)
 	copy_file(
 		source_path,
 		directory_path..'/'..get_basename(source_path)
 	)
+end
+
+--- Reads an entire file
+--- @nodiscard
+--- @param pathname string
+--- @return string The file contents
+local function read_file(pathname)
+	local file, err_msg = io.open(pathname, 'r')
+
+	if not file then
+		error("Could not open '"..pathname.."': "..err_msg)
+	end
+
+	local contents = file:read('a')
+	file:close()
+
+	return contents
 end
 
 local function remove_path(pathname)
@@ -111,6 +144,8 @@ return {
 	copy_file = copy_file,
 	copy_file_into_directory = copy_file_into_directory,
 	get_basename = get_basename,
+	get_dirname = get_dirname,
+	read_file = read_file,
 	remove_path = remove_path,
 	get_file_extension = get_file_extension,
 	make_temp_dir = make_temp_dir,
