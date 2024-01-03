@@ -28,7 +28,7 @@ plugins.load({
 	},
 	{
 		'hrsh7th/cmp-buffer',
-		commit = 'a0fe52489ff6e235d62407f8fa72aef80222040a'
+		commit = '3022dbc9166796b644a841a02de8dd1cc1d311fa'
 	},
 	{
 		'hrsh7th/cmp-path',
