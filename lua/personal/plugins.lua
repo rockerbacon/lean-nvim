@@ -48,7 +48,7 @@ plugins.load({
 	},
 	{
 		'Darazaki/indent-o-matic',
-		commit = '68f19ea15da7e944e7a5c848831837d2023b4ac2'
+		commit = '4d11e98f523d3c4500b1dc33f0d1a248a4f69719'
 	}
 })
 
