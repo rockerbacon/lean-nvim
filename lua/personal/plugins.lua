@@ -24,7 +24,7 @@ plugins.load({
 	},
 	{
 		'hrsh7th/nvim-cmp',
-		commit = '4efecf7f5b86949de387e63fa86715bc39f92219'
+		commit = '538e37ba87284942c1d76ed38dd497e54e65b891'
 	},
 	{
 		'hrsh7th/cmp-buffer',
