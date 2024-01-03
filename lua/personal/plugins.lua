@@ -40,7 +40,7 @@ plugins.load({
 	},
 	{
 		'neovim/nvim-lspconfig',
-		tag = 'v0.1.2'
+		tag = 'v0.1.7'
 	},
 	{
 		'steelsojka/pears.nvim',
