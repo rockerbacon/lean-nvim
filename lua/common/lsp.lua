@@ -9,7 +9,7 @@ local capabilities = {
 plugins.use(
 	'cmp_nvim_lsp',
 	function (cmp)
-		capabilities.cmp = cmp.update_capabilities(capabilities.vim)
+		capabilities.cmp = cmp.default_capabilities(capabilities.vim)
 	end
 )
 
