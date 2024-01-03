@@ -18,6 +18,33 @@ local installer = Builder.start(server_name)
 
 return {
 	install = installer,
-	settings = nil,
+	settings = {
+		pylsp = {
+			plugins = {
+				autopep8 = {
+					enabled = false
+				},
+				flake8 = {
+					enabled = false
+				},
+				mccabe = {
+					enabled = false
+				},
+				pycodestyle = {
+					enabled = false
+				},
+				pydocstyle = {
+					enabled = true,
+					convention = 'google'
+				},
+				pylint = {
+					enabled = false
+				},
+				yapf = {
+					enabled = false
+				}
+			}
+		}
+	},
 }
 
