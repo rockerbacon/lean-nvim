@@ -36,7 +36,7 @@ plugins.load({
 	},
 	{
 		'hrsh7th/cmp-nvim-lsp',
-		commit = '134117299ff9e34adde30a735cd8ca9cf8f3db81'
+		commit = '5af77f54de1b16c34b23cba810150689a3a90312'
 	},
 	{
 		'neovim/nvim-lspconfig',
