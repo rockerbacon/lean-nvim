@@ -4,6 +4,6 @@ lsp.load_servers({
 	'clangd',
 	'gopls',
 	'rust_analyzer',
-	'sumneko_lua'
+	'lua_ls'
 })
 
