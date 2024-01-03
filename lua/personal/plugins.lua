@@ -20,7 +20,7 @@ plugins.load({
 	},
 	{
 		'L3MON4D3/LuaSnip',
-		commit = 'a45cd5f4d9dea7c64b37fa69dea91e46bbbe9671'
+		tag = '2.2.0'
 	},
 	{
 		'hrsh7th/nvim-cmp',
