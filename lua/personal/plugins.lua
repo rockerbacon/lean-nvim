@@ -2,7 +2,10 @@ local plugins = require('common.plugins')
 require 'personal.options'
 
 plugins.load({
-	'nvim-lua/plenary.nvim',
+	{
+		'nvim-lua/plenary.nvim',
+		tag = 'v0.1.4'
+	},
 	{
 		'rockerbacon/vim-noctu',
 		run = plugins.new_colorscheme_installer({ 'colors/noctu.vim' })
