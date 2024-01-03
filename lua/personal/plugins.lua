@@ -2,7 +2,6 @@ local plugins = require('common.plugins')
 require 'personal.options'
 
 plugins.load({
-	'nvim-lua/popup.nvim',
 	'nvim-lua/plenary.nvim',
 	{
 		'rockerbacon/vim-noctu',
