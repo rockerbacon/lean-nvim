@@ -32,7 +32,7 @@ plugins.load({
 	},
 	{
 		'hrsh7th/cmp-path',
-		commit = '56a0fe5c46835ecc6323bda69f3924758b991590'
+		commit = '91ff86cd9c29299a64f968ebb45846c485725f23'
 	},
 	{
 		'hrsh7th/cmp-nvim-lsp',
