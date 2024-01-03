@@ -12,7 +12,7 @@ plugins.load({
 	},
 	{
 		'nvim-telescope/telescope.nvim',
-		tag = 'nvim-0.6'
+		tag = 'v0.1.5'
 	},
 	{
 		'numToStr/Comment.nvim',
