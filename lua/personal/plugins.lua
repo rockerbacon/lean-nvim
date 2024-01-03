@@ -12,7 +12,7 @@ plugins.load({
 	},
 	{
 		'nvim-telescope/telescope.nvim',
-		tag = 'v0.1.5'
+		tag = '0.1.5'
 	},
 	{
 		'numToStr/Comment.nvim',
@@ -20,7 +20,7 @@ plugins.load({
 	},
 	{
 		'L3MON4D3/LuaSnip',
-		tag = '2.2.0'
+		tag = 'v2.2.0'
 	},
 	{
 		'hrsh7th/nvim-cmp',
