@@ -16,7 +16,7 @@ plugins.load({
 	},
 	{
 		'numToStr/Comment.nvim',
-		tag = 'v0.6'
+		tag = 'v0.8.0'
 	},
 	{
 		'L3MON4D3/LuaSnip',
