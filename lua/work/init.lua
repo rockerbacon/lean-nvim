@@ -1,7 +1,7 @@
 local HotLoader = require('common.hot_loader')
 local plugins = require('common.plugins')
 
-local loader = HotLoader.single('personal.init')
+local loader = HotLoader.single('work.init')
 
 loader:before_reloading(
 	'personal.plugins',

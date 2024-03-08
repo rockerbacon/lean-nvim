@@ -2,43 +2,45 @@ local plugins = require('common.plugins')
 require 'personal.options'
 
 plugins.load({
-	'nvim-lua/popup.nvim',
-	'nvim-lua/plenary.nvim',
+	{
+		'nvim-lua/plenary.nvim',
+		tag = 'v0.1.4'
+	},
 	{
 		'rockerbacon/vim-noctu',
 		run = plugins.new_colorscheme_installer({ 'colors/noctu.vim' })
 	},
 	{
 		'nvim-telescope/telescope.nvim',
-		tag = 'nvim-0.6'
+		tag = '0.1.5'
 	},
 	{
 		'numToStr/Comment.nvim',
-		tag = 'v0.6'
+		tag = 'v0.8.0'
 	},
 	{
 		'L3MON4D3/LuaSnip',
-		commit = 'a45cd5f4d9dea7c64b37fa69dea91e46bbbe9671'
+		tag = 'v2.2.0'
 	},
 	{
 		'hrsh7th/nvim-cmp',
-		commit = '4efecf7f5b86949de387e63fa86715bc39f92219'
+		commit = '538e37ba87284942c1d76ed38dd497e54e65b891'
 	},
 	{
 		'hrsh7th/cmp-buffer',
-		commit = 'a0fe52489ff6e235d62407f8fa72aef80222040a'
+		commit = '3022dbc9166796b644a841a02de8dd1cc1d311fa'
 	},
 	{
 		'hrsh7th/cmp-path',
-		commit = '56a0fe5c46835ecc6323bda69f3924758b991590'
+		commit = '91ff86cd9c29299a64f968ebb45846c485725f23'
 	},
 	{
 		'hrsh7th/cmp-nvim-lsp',
-		commit = '134117299ff9e34adde30a735cd8ca9cf8f3db81'
+		commit = '5af77f54de1b16c34b23cba810150689a3a90312'
 	},
 	{
 		'neovim/nvim-lspconfig',
-		tag = 'v0.1.2'
+		tag = 'v0.1.7'
 	},
 	{
 		'steelsojka/pears.nvim',
@@ -46,7 +48,7 @@ plugins.load({
 	},
 	{
 		'Darazaki/indent-o-matic',
-		commit = '68f19ea15da7e944e7a5c848831837d2023b4ac2'
+		commit = '4d11e98f523d3c4500b1dc33f0d1a248a4f69719'
 	}
 })
 

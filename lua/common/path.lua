@@ -25,7 +25,7 @@ local function get_download_path()
 end
 
 local function get_lsp_server_dir()
-	return vim.fn.stdpath('config')..'/lsp_servers'
+	return vim.fn.stdpath('data')..'/lsp_servers'
 end
 
 local function get_plugins_dir()
