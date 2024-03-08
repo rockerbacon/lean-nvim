@@ -33,6 +33,18 @@ local custom_keymaps = {
 
 local leader = Leader.new()
 
+local function set_keymap(modes, key, map, opts)
+	for _, mode in ipairs(modes) do
+		if not custom_keymaps[mode][key] then
+			custom_keymaps[mode][key] = map
+		else
+			error('Attempt to set duplicate keymap for "'..key..'"')
+		end
+
+		vim.api.nvim_set_keymap(mode, key, map, opts)
+	end
+end
+
 local function add(key, command, opt_modes, opt_kargs)
 	local modes = opt_modes or {
 		mode.normal,
@@ -41,15 +53,16 @@ local function add(key, command, opt_modes, opt_kargs)
 
 	local full_command = ':'..command..'<CR>'
 
-	for _, keymap_mode in ipairs(modes) do
-		if not custom_keymaps[keymap_mode][key] then
-			custom_keymaps[keymap_mode][key] = command
-		else
-			error('Attempt to set duplicate keymap for "'..key..'"')
-		end
+	set_keymap(modes, key, full_command, opts)
+end
 
-		vim.api.nvim_set_keymap(keymap_mode, key, full_command, opts)
-	end
+local function alias(alias_key, ref_key, opt_modes, opt_kargs)
+	local modes = opt_modes or {
+		mode.normal,
+	}
+	local opts = opt_kargs or {}
+
+	set_keymap(modes, alias_key, ref_key, opts)
 end
 
 local function clear_all()
@@ -64,6 +77,7 @@ end
 
 return {
 	add = add,
+	alias = alias,
 	clear_all = clear_all,
 	leader = leader,
 	mode = mode,

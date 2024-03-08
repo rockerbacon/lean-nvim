@@ -6,6 +6,7 @@ local esc = keymaps.special.escape
 local tab = keymaps.special.tab
 local space = keymaps.special.space
 
+local alt = keymaps.modifier.alt
 local ctrl = keymaps.modifier.ctrl
 local shift = keymaps.modifier.shift
 
@@ -15,7 +16,16 @@ keymaps.clear_all()
 
 vim.g.mapleader = ','
 
-keymaps.add(ctrl+'l', 'lua leanvim.browse_files({ display = "split" })')
+keymaps.alias(ctrl+'h', ctrl+'w'..'h')
+keymaps.alias(ctrl+'l', ctrl+'w'..'l')
+keymaps.alias(ctrl+'k', ctrl+'w'..'k')
+keymaps.alias(ctrl+'j', ctrl+'w'..'j')
+keymaps.alias(ctrl+alt+'h', ctrl+'w'..'H')
+keymaps.alias(ctrl+alt+'l', ctrl+'w'..'L')
+keymaps.alias(ctrl+alt+'k', ctrl+'w'..'K')
+keymaps.alias(ctrl+alt+'j', ctrl+'w'..'J')
+
+keymaps.add(leader+'l', 'lua leanvim.browse_files({ display = "split" })')
 keymaps.add(leader+'p', 'lua leanvim.browse_files({ display = "popup" })')
 
 keymaps.add(leader+'e', 'lua vim.diagnostic.open_float(nil)')
