@@ -43,13 +43,13 @@ plugins.load({
 		tag = 'v0.1.7'
 	},
 	{
-		'steelsojka/pears.nvim',
-		commit = '14e6c47c74768b74190a529e41911ae838c45254'
-	},
-	{
 		'Darazaki/indent-o-matic',
 		commit = '4d11e98f523d3c4500b1dc33f0d1a248a4f69719'
-	}
+	},
+	{
+		'windwp/nvim-autopairs',
+		commit = 'dbfc1c34bed415906395db8303c71039b3a3ffb4'
+	},
 })
 
 plugins.setup('telescope', {
@@ -60,7 +60,11 @@ plugins.setup('cmp', profile_opt.cmp)
 
 plugins.setup('Comment', profile_opt.comment)
 
-plugins.setup('pears', nil)
-
 plugins.setup('indent-o-matic', {})
+
+plugins.setup('nvim-autopairs', {})
+plugins.use('nvim-autopairs.completion.cmp', function(autopairs)
+	local cmp = require('cmp')
+	cmp.event:on('confirm-done', autopairs.on_confirm_done())
+end)
 
